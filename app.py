@@ -6,7 +6,12 @@ from calendar import month_name
 
 app = Flask(__name__)
 app.secret_key = "replace-this-with-a-long-random-secret-before-deployment"
-DB_PATH = Path(__file__).with_name("monetra.db")
+import os
+if os.environ.get("RENDER"):
+    DB_PATH = Path("/var/data/monetra.db")
+else:
+    DB_PATH = Path(__file__).with_name("monetra.db")
+
 CATEGORIES = ["Продукты", "Транспорт", "Дом", "Рестораны", "Здоровье", "Развлечения", "Подписки", "Зарплата", "Фриланс", "Подарки", "Другое"]
 
 def connect_db():
