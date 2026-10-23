@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Настройки — Monetra{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow light">ТВОЁ ПРОСТРАНСТВО</div><h1>Настройки</h1><p>Основная информация о локальном профиле.</p></div></div>
+<section class="panel settings-panel"><div class="settings-avatar">{{ p.first[:1]|upper }}{{ p.last[:1]|upper }}</div><div class="settings-copy"><h2>{{ p.first }} {{ p.last }}</h2><p>Личный профиль Monetra</p><span class="type-chip type-income">Без пароля и регистрации</span></div><div class="settings-divider"></div><div class="settings-info"><div><span>Имя</span><b>{{ p.first }}</b></div><div><span>Фамилия</span><b>{{ p.last }}</b></div><div><span>Хранение данных</span><b>Локальная база SQLite</b></div></div><div class="notice-box"><b>Важно знать</b><p>Этот профиль не является защищённой учётной записью. Имя и фамилия определяют локальный профиль, но любой человек с доступом к этому браузеру или базе данных может получить доступ к данным. Не сохраняй здесь конфиденциальную финансовую информацию.</p></div><form action="{{ url_for('switch_user') }}" method="post"><button class="secondary-btn">Сменить профиль</button></form></section>
+{% endblock %}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071b4b">
+  <title>{% block title %}Monetra — твои финансы под контролем{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+{% if session.get('user_key') %}
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="{{ url_for('dashboard') }}">
+      <span class="brand-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="30" height="29" rx="8" fill="#1d83ff"/><rect x="12" y="4" width="30" height="29" rx="8" fill="#0b3b9b"/><path d="M17 26V13l10 8 10-8v13" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span><b>Monetra</b><small>Твои финансы под контролем</small></span>
+    </a>
+    <nav class="nav-links">
+      <a class="{{ 'active' if request.endpoint == 'dashboard' else '' }}" href="{{ url_for('dashboard') }}"><span>⌂</span> Главная</a>
+      <a class="{{ 'active' if request.endpoint == 'transactions_page' else '' }}" href="{{ url_for('transactions_page') }}"><span>▤</span> Транзакции</a>
+      <a class="{{ 'active' if request.endpoint == 'analytics' else '' }}" href="{{ url_for('analytics') }}"><span>▥</span> Аналитика</a>
+      <a href="{{ url_for('dashboard') }}#goals"><span>◎</span> Цели</a>
+      <a class="{{ 'active' if request.endpoint == 'settings' else '' }}" href="{{ url_for('settings') }}"><span>⚙</span> Настройки</a>
+    </nav>
+    <div class="sidebar-promo"><div class="promo-icon">↗</div><h3>Лучшие решения начинаются с контроля</h3><p>Monetra помогает управлять деньгами и достигать целей.</p><div class="promo-orb">M</div></div>
+    <div class="sidebar-foot">Monetra <span>v1.0.0</span></div>
+  </aside>
+  <main class="main-area">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu" aria-label="Открыть меню">☰</button>
+      <label class="searchbox"><span>⌕</span><input id="globalSearch" placeholder="Поиск по транзакциям, категориям..." autocomplete="off"></label>
+      <div class="top-actions"><button class="icon-btn notification" aria-label="Уведомления">♧<i></i></button><div class="profile-avatar">{{ p.first[:1]|upper }}{{ p.last[:1]|upper }}</div><div class="profile-name">{{ p.first }} {{ p.last }}<small>Личный профиль</small></div><form action="{{ url_for('switch_user') }}" method="post"><button class="tiny-btn" title="Сменить профиль">⌄</button></form></div>
+    </header>
+    <section class="page-content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}<div class="flash-stack">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </section>
+  </main>
+</div>
+{% else %}
+{% block public_content %}{% endblock %}
+{% endif %}
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Добро пожаловать в Monetra{% endblock %}
+{% block public_content %}
+<main class="welcome-screen">
+  <div class="welcome-glow glow-a"></div><div class="welcome-glow glow-b"></div>
+  <div class="welcome-top-brand"><div class="brand-mark large"><svg viewBox="0 0 48 48"><rect x="6" y="9" width="30" height="29" rx="8" fill="#1d83ff"/><rect x="12" y="4" width="30" height="29" rx="8" fill="#0b3b9b"/><path d="M17 26V13l10 8 10-8v13" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span><b>Monetra</b><small>Твои финансы под контролем</small></span></div>
+  <div class="welcome-layout">
+    <section class="welcome-copy">
+      <div class="eyebrow"><span></span> ТВОИ ДЕНЬГИ. ТВОИ ПРАВИЛА.</div>
+      <h1>Финансовая<br><em>ясность</em> начинается здесь.</h1>
+      <p>Управляй доходами, контролируй расходы и приближайся к своим целям — в одном красивом и понятном месте.</p>
+      <div class="welcome-benefits"><div><span class="benefit-icon blue">↗</span><span><b>Всё под контролем</b><small>Доходы, расходы и баланс</small></span></div><div><span class="benefit-icon mint">◷</span><span><b>Простая аналитика</b><small>Понимай, куда уходят деньги</small></span></div><div><span class="benefit-icon violet">◎</span><span><b>Твои цели</b><small>Следи за прогрессом накоплений</small></span></div></div>
+      <div class="welcome-note"><span class="note-dot"></span> Без регистрации, пароля и лишних шагов</div>
+    </section>
+    <section class="welcome-card">
+      <div class="card-emblem"><svg viewBox="0 0 48 48"><path d="M8 14.5A3.5 3.5 0 0 1 11.5 11H38v27H11.5A3.5 3.5 0 0 1 8 34.5z" fill="none" stroke="currentColor" stroke-width="2.8"/><path d="M8 17h30M31 24h11v10H31a5 5 0 0 1 0-10z" fill="none" stroke="currentColor" stroke-width="2.8"/><circle cx="33" cy="29" r="1.6" fill="currentColor"/></svg></div>
+      <h2>Monetra</h2><p class="card-subtitle">Твои финансы под контролем</p>
+      <div class="welcome-divider"></div>
+      <h3>Давай знакомиться</h3><p class="form-intro">Как к тебе обращаться?</p>
+      <form method="post" class="welcome-form">
+        <label for="first_name">Имя</label><input id="first_name" name="first_name" placeholder="Например, Амир" maxlength="50" required autocomplete="given-name">
+        <label for="last_name">Фамилия</label><input id="last_name" name="last_name" placeholder="Твоя фамилия" maxlength="50" required autocomplete="family-name">
+        {% if error %}<div class="form-error">{{ error }}</div>{% endif %}
+        <button type="submit" class="primary-btn full">Продолжить <span>→</span></button>
+      </form>
+      <div class="no-account"><span>✓</span> Без регистрации и пароля</div>
+      <p class="privacy-note">Профиль хранится в этом браузере. Не вводи конфиденциальные данные.</p>
+    </section>
+  </div>
+  <footer class="welcome-footer"><span>© 2026 Monetra</span><span>Создано для ясности в финансах</span><span>Просто. Спокойно. Под контролем.</span></footer>
+</main>
+{% endblock %}
